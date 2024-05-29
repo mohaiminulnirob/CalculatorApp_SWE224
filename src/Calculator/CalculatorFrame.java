@@ -7,7 +7,7 @@ public class CalculatorFrame extends JFrame{
     JFrame frame;
     CalculatorFrame() {
         frame = new JFrame();
-        frame.setTitle("Calculator");
+        frame.setTitle("Simple Calculator");
         frame.setSize(300, 490);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.black);
