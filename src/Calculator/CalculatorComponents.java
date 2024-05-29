@@ -2,8 +2,14 @@ package Calculator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class CalculatorComponents extends CalculatorFrame{
+    JLabel animatedLabel;
+    String text = "Calculator, where math meets simplicity!";
+    int textIndex = 0;
     JLabel label = new JLabel();
     JTextField textField = new JTextField();
     JButton[] digitButtons;
@@ -34,10 +40,10 @@ public class CalculatorComponents extends CalculatorFrame{
                 x=10;
             else x=80;
             if(i<=3 && i>0)
-                y=350;
+                y=354;
             else if(i<=6)
-                y=290;
-            else y=230;
+                y=298;
+            else y=242;
             if(i==0){
                 x=10;y=410;
             }
@@ -45,21 +51,41 @@ public class CalculatorComponents extends CalculatorFrame{
             digitButtons[i].setFont(new Font("Arial", Font.BOLD, 20));
             frame.add(digitButtons[i]);
         }
-        label.setBounds(220, 1, 100, 50);
-        label.setForeground(Color.WHITE);
+        animatedLabel = new JLabel();
+        animatedLabel.setBounds(10, 5, 280, 30);
+        animatedLabel.setForeground(Color.white);
+        animatedLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        frame.add(animatedLabel);
+        Timer timer = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateText();
+            }
+        });
+        timer.start();
+
+        label.setBounds(170, 45, 110, 25);
+        label.setForeground(Color.black);
+        label.setBackground(Color.WHITE);
+        label.setFont(new Font("Arial", Font.PLAIN, 15));
+        label.setOpaque(true);
         frame.add(label);
 
-        textField.setBounds(10, 40, 270, 40);
-        textField.setFont(new Font("Arial", Font.BOLD, 20));
+        textField.setBounds(10, 75, 270, 40);
+        textField.setFont(new Font("Arial", Font.BOLD, 23));
+        textField.setForeground(Color.black);
+        textField.setBackground(Color.white);
         textField.setEditable(false);
         textField.setHorizontalAlignment(SwingConstants.RIGHT);
-        frame.add(textField);
+        frame.getContentPane().add(textField);
+        frame.validate();
+        frame.repaint();
 
-        buttonOn.setBounds(220, 110, 60, 40);
+        buttonOn.setBounds(220, 130, 60, 40);
         buttonOn.setFont(new Font("Arial", Font.BOLD, 15));
         frame.add(buttonOn);
 
-        buttonOff.setBounds(10, 110, 60, 40);
+        buttonOff.setBounds(10, 130, 60, 40);
         buttonOff.setFont(new Font("Arial", Font.BOLD, 12));
         frame.add(buttonOff);
 
@@ -75,41 +101,48 @@ public class CalculatorComponents extends CalculatorFrame{
         buttonEqual.setFont(new Font("Arial", Font.BOLD, 20));
         frame.add(buttonEqual);
 
-        buttonDiv.setBounds(220, 170, 60, 40);
+        buttonDiv.setBounds(220, 186, 60, 40);
         buttonDiv.setFont(new Font("Arial", Font.BOLD, 20));
         frame.add(buttonDiv);
 
-        buttonSqrt.setBounds(10, 170, 60, 40);
+        buttonSqrt.setBounds(10, 186, 60, 40);
         buttonSqrt.setFont(new Font("Arial", Font.BOLD, 13));
         frame.add(buttonSqrt);
 
-        buttonMul.setBounds(220, 230, 60, 40);
+        buttonMul.setBounds(220, 242, 60, 40);
         buttonMul.setFont(new Font("Arial", Font.BOLD, 20));
         frame.add(buttonMul);
 
-        buttonMinus.setBounds(220, 290, 60, 40);
+        buttonMinus.setBounds(220, 298, 60, 40);
         buttonMinus.setFont(new Font("Arial", Font.BOLD, 25));
         frame.add(buttonMinus);
 
-        buttonPlus.setBounds(220, 350, 60, 40);
+        buttonPlus.setBounds(220, 354, 60, 40);
         buttonPlus.setFont(new Font("Arial", Font.BOLD, 20));
         frame.add(buttonPlus);
 
-        buttonSquare.setBounds(80, 170, 60, 40);
+        buttonSquare.setBounds(80, 186, 60, 40);
         buttonSquare.setFont(new Font("Arial", Font.BOLD, 15));
         frame.add(buttonSquare);
 
-        buttonInverse.setBounds(150, 170, 60, 40);
+        buttonInverse.setBounds(150, 186, 60, 40);
         buttonInverse.setFont(new Font("Arial", Font.BOLD, 15));
         frame.add(buttonInverse);
 
-        buttonDelete.setBounds(150, 110, 60, 40);
+        buttonDelete.setBounds(150, 130, 60, 40);
         buttonDelete.setFont(new Font("Arial", Font.BOLD, 12));
         frame.add(buttonDelete);
 
-        buttonClear.setBounds(80, 110, 60, 40);
+        buttonClear.setBounds(80, 130, 60, 40);
         buttonClear.setFont(new Font("Arial", Font.BOLD, 12));
         frame.add(buttonClear);
+    }
+    private void updateText() {
+        textIndex++;
+        if (textIndex > text.length()) {
+            textIndex = text.length();
+        }
+        animatedLabel.setText(text.substring(0, textIndex));
     }
 }
 
